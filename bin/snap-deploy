@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.join(File.expand_path('../../', __FILE__), 'bundle'))
+require 'bundler/setup'
+require 'bundler'
+
+Process.respond_to?(:setproctitle) ? Process.setproctitle('snap-deploy') : $0 = 'snap-deploy'
+
+require 'snap_deploy'
+
+SnapDeploy::CLI.run

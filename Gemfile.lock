@@ -1,0 +1,69 @@
+PATH
+  remote: .
+  specs:
+    snap_deploy (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ansi (1.4.3)
+    arr-pm (0.0.9)
+      cabin (> 0)
+    aws-sdk (1.53.0)
+      aws-sdk-v1 (= 1.53.0)
+    aws-sdk-v1 (1.53.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+    backports (3.6.0)
+    cabin (0.6.1)
+    childprocess (0.5.3)
+      ffi (~> 1.0, >= 1.0.11)
+    clamp (0.6.3)
+    diff-lcs (1.2.5)
+    docile (1.1.5)
+    ffi (1.9.3)
+    fpm (1.2.0)
+      arr-pm (~> 0.0.9)
+      backports (>= 2.6.2)
+      cabin (>= 0.6.0)
+      childprocess
+      clamp (~> 0.6)
+      ffi
+      json (>= 1.7.7)
+    json (1.8.1)
+    mini_portile (0.6.0)
+    multi_json (1.10.1)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
+    rake (10.3.2)
+    rspec (3.1.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
+    rspec-core (3.1.3)
+      rspec-support (~> 3.1.0)
+    rspec-expectations (3.1.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.1.0)
+    rspec-mocks (3.1.0)
+      rspec-support (~> 3.1.0)
+    rspec-support (3.1.0)
+    simplecov (0.9.0)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ansi
+  aws-sdk
+  bundler (~> 1.6)
+  clamp
+  fpm
+  rake
+  rspec
+  simplecov
+  snap_deploy!
