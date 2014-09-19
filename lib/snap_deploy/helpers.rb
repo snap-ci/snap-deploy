@@ -28,7 +28,7 @@ module SnapDeploy
     end
 
     def manually_triggered_by
-      ENV['SNAP_STAGE_TRIGGERED_BY'] or raise
+      ENV['SNAP_STAGE_TRIGGERED_BY']
     end
 
     def secret_access_key
