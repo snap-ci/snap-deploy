@@ -23,7 +23,7 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
       app_id: app_id,
       command: {name: 'deploy'},
       comment: "Deploy build 123(rev #{short_revision}) via Snap CI by john-doe",
-      custom_json: {"deploy"=>{"simplephpapp"=>{"migrate"=>false, "scm"=>{"revision"=>revision}}}}.to_json
+      custom_json: {"deploy"=>{"simplephpapp"=>{"migrate"=>true, "scm"=>{"revision"=>revision}}}}.to_json
     ).and_return({deployment_id: deployment_id})
 
     expect(@client).to receive(:describe_deployments).with({deployment_ids: [deployment_id]}).and_return(
