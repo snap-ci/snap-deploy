@@ -31,6 +31,7 @@ GEM
       ffi
       json (>= 1.7.7)
     json (1.8.1)
+    mime-types (2.3)
     mini_portile (0.6.0)
     multi_json (1.10.1)
     nokogiri (1.6.3.1)
@@ -63,6 +64,7 @@ DEPENDENCIES
   bundler (~> 1.6)
   clamp
   fpm
+  mime-types
   rake
   rspec
   simplecov

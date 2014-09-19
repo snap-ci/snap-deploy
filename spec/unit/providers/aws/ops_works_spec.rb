@@ -7,12 +7,12 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
     AWS.stub!
     @client = double(:ops_works_client)
     @cmd = SnapDeploy::Provider::AWS::OpsWorks.new(nil, {}, {})
-    expect(@cmd).to receive(:client).at_least(1).and_return(@client)
+    allow(@cmd).to receive(:client).and_return(@client)
 
-    expect(ENV).to receive(:[]).with('SNAP_PIPELINE_COUNTER').at_least(1).and_return('123')
-    expect(ENV).to receive(:[]).with('SNAP_COMMIT_SHORT').at_least(1).and_return(short_revision)
-    expect(ENV).to receive(:[]).with('SNAP_COMMIT').at_least(1).and_return(revision)
-    expect(ENV).to receive(:[]).with('SNAP_STAGE_TRIGGERED_BY').at_least(1).and_return('john-doe')
+    allow(ENV).to receive(:[]).with('SNAP_PIPELINE_COUNTER').and_return('123')
+    allow(ENV).to receive(:[]).with('SNAP_COMMIT_SHORT').and_return(short_revision)
+    allow(ENV).to receive(:[]).with('SNAP_COMMIT').and_return(revision)
+    allow(ENV).to receive(:[]).with('SNAP_STAGE_TRIGGERED_BY').and_return('john-doe')
   end
 
   example 'with migrate option not specified' do
@@ -129,23 +129,9 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
     @deployment_id ||= SecureRandom.uuid
   end
 
-  def revision
-    @revision ||= SecureRandom.hex(32)
-  end
-
   def stack_id
     @stack_id ||= SecureRandom.uuid
   end
-
-  def short_revision
-    revision[0..7]
-  end
-
-  def strip_heredoc(str)
-    indent = str.scan(/^[ \t]*(?=\S)/).min.size || 0
-    str.gsub(/^[ \t]{#{indent}}/, '')
-  end
-
 
   def ops_works_app
     {shortname: 'simplephpapp', stack_id: stack_id}

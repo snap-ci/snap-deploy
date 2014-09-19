@@ -34,5 +34,15 @@ module SnapDeploy
     def secret_access_key
       ENV['AWS_SECRET_ACCESS_KEY'] or raise
     end
+
+    def encoding_for(path)
+      file_cmd_output = `file #{path}`
+      case file_cmd_output
+      when /gzip compressed/
+        'gzip'
+      when /compress'd/
+        'compress'
+      end
+    end
   end
 end

@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'ansi'
   spec.add_development_dependency "clamp"
   spec.add_development_dependency "aws-sdk"
+  spec.add_development_dependency "mime-types"
 end
