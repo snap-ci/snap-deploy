@@ -4,8 +4,9 @@ require 'json'
 class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   option '--app-id', "APP_ID", "The application ID", :required => true
-  option '--[no-]wait',    :flag, 'Wait until (or not) deployed and return the deployment status.'
-  option '--[no-]migrate', :flag, 'If the db should be automatically migrated. Defaults to true.'
+  option '--[no-]wait',    :flag, 'Wait until (or not) deployed and return the deployment status.', :default => true
+  option '--[no-]migrate', :flag, 'If the db should be automatically migrated.', :default => true
+
   include SnapDeploy::CLI::DefaultOptions
   include SnapDeploy::Helpers
 
