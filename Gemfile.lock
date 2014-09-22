@@ -2,6 +2,10 @@ PATH
   remote: .
   specs:
     snap_deploy (0.0.1)
+      ansi
+      aws-sdk
+      clamp
+      mime-types
 
 GEM
   remote: https://rubygems.org/
@@ -59,12 +63,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ansi
-  aws-sdk
   bundler (~> 1.6)
-  clamp
   fpm
-  mime-types
   rake
   rspec
   simplecov

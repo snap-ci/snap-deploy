@@ -40,6 +40,22 @@ namespace :dist do
         puts "App server root #{app_server_root}"
         sh "git clone --depth 1 file://#{root_dir} #{app_server_root}"
 
+        cd dir do
+          mkdir_p 'usr/local/bin'
+          File.open('usr/local/bin/snap-deploy', 'w') do |f|
+            f.puts('#!/bin/bash')
+            f.puts('unset BUNDLE_BIN_PATH')
+            f.puts('unset BUNDLE_GEMFILE')
+            f.puts('unset GEM_HOME')
+            f.puts('unset GEM_PATH')
+            f.puts('unset RUBYLIB')
+            f.puts('unset RUBYOPT')
+            f.puts('export PATH=/opt/local/ruby/2.0.0-p353/bin:$PATH')
+            f.puts('/opt/local/snap-deploy/bin/snap-deploy')
+          end
+          File.chmod 0755, 'usr/local/bin/snap-deploy'
+        end
+
         cd app_server_root do
           puts "*** Installing gems in standalone mode"
           sh("export NOKOGIRI_USE_SYSTEM_LIBRARIES=1; bundle install --standalone --path bundle --local --without 'development test'")
