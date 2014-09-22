@@ -40,7 +40,7 @@ namespace :dist do
 
         cd app_server_root do
           puts "*** Installing gems in standalone mode"
-          sh("bundle install --standalone --path bundle --local")
+          sh("bundle install --standalone --path bundle --local --without 'development test'")
 
           puts "*** Cleaning up files that should not be packaged"
           rm_rf Dir['{.git*,**/*.gem}']
