@@ -28,6 +28,8 @@ namespace :dist do
     Bundler.with_clean_env do
       Dir.mktmpdir do |dir|
         root_dir = File.expand_path("../", __FILE__)
+        pkg_dir = "#{root_dir}/pkg"
+
         app_name = 'snap-deploy'
         app_server_root = File.join(dir, "/opt/local", 'snap-deploy')
 
@@ -55,7 +57,6 @@ namespace :dist do
             f.puts("Revision: #{git_revision}")
           end
 
-          pkg_dir = "#{root_dir}/pkg"
           rm_rf pkg_dir
           mkdir pkg_dir
         end
