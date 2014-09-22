@@ -3,4 +3,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in snap_deploy.gemspec
 gemspec
 
-gem 'simplecov', :group => :test
+group :development, :test do
+  gem 'simplecov'
+  gem 'rspec'
+  gem 'fpm'
+end
