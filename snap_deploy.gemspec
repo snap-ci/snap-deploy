@@ -19,9 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency 'ansi'
-  spec.add_development_dependency "clamp"
-  spec.add_development_dependency "aws-sdk"
-  spec.add_development_dependency "mime-types"
+  spec.add_runtime_dependency 'ansi'
+  spec.add_runtime_dependency "clamp"
+  spec.add_runtime_dependency "aws-sdk"
+  spec.add_runtime_dependency "mime-types"
 end

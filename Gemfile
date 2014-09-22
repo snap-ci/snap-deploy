@@ -7,4 +7,5 @@ group :development, :test do
   gem 'simplecov'
   gem 'rspec'
   gem 'fpm'
+  gem 'rake'
 end
