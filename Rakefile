@@ -58,12 +58,12 @@ namespace :dist do
           pkg_dir = "#{root_dir}/pkg"
           rm_rf pkg_dir
           mkdir pkg_dir
-
-          description_string = %Q{This package contains a continuous deployment tool.}
-          sh(%Q{
-               bundle exec fpm -s dir -t rpm -C #{dir} --rpm-auto-add-directories --package #{pkg_dir}/#{app_name}-#{version}-#{release}.x86_64.rpm --name #{app_name} --architecture x86_64 --version "#{version}" --rpm-user root --rpm-group root --maintainer snap-ci@thoughtworks.com --vendor snap-ci@thoughtworks.com --url http://snap-ci.com --description "#{description_string}" --iteration #{release} --license 'Private'  --verbose .
-          })
         end
+
+        description_string = %Q{This package contains a continuous deployment tool.}
+        sh(%Q{
+          bundle exec fpm -s dir -t rpm -C #{dir} --rpm-auto-add-directories --package #{pkg_dir}/#{app_name}-#{version}-#{release}.x86_64.rpm --name #{app_name} --architecture x86_64 --version "#{version}" --rpm-user root --rpm-group root --maintainer snap-ci@thoughtworks.com --vendor snap-ci@thoughtworks.com --url http://snap-ci.com --description "#{description_string}" --iteration #{release} --license 'Private'  --verbose .
+        })
       end
     end
   end
