@@ -28,8 +28,8 @@ namespace :dist do
     Bundler.with_clean_env do
       Dir.mktmpdir do |dir|
         root_dir = File.expand_path("../", __FILE__)
-        app_name = 'gnocci'
-        app_server_root = File.join(dir, "/opt/local", 'gnocci')
+        app_name = 'snap-deploy'
+        app_server_root = File.join(dir, "/opt/local", 'snap-deploy')
 
         puts "App server root #{app_server_root}"
 
@@ -40,7 +40,7 @@ namespace :dist do
 
         cd app_server_root do
           puts "*** Installing gems in standalone mode"
-          sh("NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install --standalone --path bundle --local")
+          sh("bundle install --standalone --path bundle --local")
 
           puts "*** Cleaning up files that should not be packaged"
           rm_rf Dir['{.git*,**/*.gem}']
