@@ -39,7 +39,7 @@ module SnapDeploy
     def logger
       @logger ||= Logger.new($stdout).tap do |logger|
         $stdout.sync = true
-        logger.level = verbose? ? Logger::DEBUG : Logger::INFO
+        logger.level = verbose? ? Logger::DEBUG : Logger::WARN
       end
     end
 
