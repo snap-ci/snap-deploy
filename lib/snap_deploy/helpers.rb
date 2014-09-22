@@ -43,6 +43,12 @@ module SnapDeploy
       end
     end
 
+    def deploy_comment
+      comment = "Deploy build #{pipeline_counter}(rev #{short_commit}) via Snap CI"
+      comment << " by #{manually_triggered_by}" if manually_triggered_by
+      comment
+    end
+
     def encoding_for(path)
       file_cmd_output = `file #{path}`
       case file_cmd_output

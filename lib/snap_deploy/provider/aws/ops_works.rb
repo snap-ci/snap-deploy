@@ -86,12 +86,6 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
     data[:apps].first
   end
 
-  def deploy_comment
-    comment = "Deploy build #{pipeline_counter}(rev #{short_commit}) via Snap CI"
-    comment << " by #{manually_triggered_by}" if manually_triggered_by
-    comment
-  end
-
   def client
     @client ||= begin
       AWS.config(access_key_id: access_key_id, secret_access_key: secret_access_key, logger: logger, log_formatter: AWS::Core::LogFormatter.colored)
