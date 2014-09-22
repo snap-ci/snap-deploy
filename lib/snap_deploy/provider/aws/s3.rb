@@ -94,7 +94,7 @@ class SnapDeploy::Provider::AWS::S3 < Clamp::Command
 
   def client
     @client ||= begin
-      AWS.config(access_key_id: access_key_id, secret_access_key: secret_access_key, region: region)
+      AWS.config(access_key_id: access_key_id, secret_access_key: secret_access_key, region: region, logger: logger)
       info "Logging in with Access Key: #{access_key_id[-4..-1].rjust(20, '*')}"
       AWS::S3.new(endpoint: endpoint)
     end

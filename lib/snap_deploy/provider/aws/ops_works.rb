@@ -94,7 +94,7 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   def client
     @client ||= begin
-      AWS.config(access_key_id: access_key_id, secret_access_key: secret_access_key)
+      AWS.config(access_key_id: access_key_id, secret_access_key: secret_access_key, logger: logger)
       info "Logging in with Access Key: #{access_key_id[-4..-1].rjust(20, '*')}"
       AWS::OpsWorks.new.client
     end

@@ -3,6 +3,7 @@ module SnapDeploy
     def log(message)
       puts message
     end
+
     def info(message)
       puts message
     end
@@ -33,6 +34,12 @@ module SnapDeploy
 
     def secret_access_key
       ENV['AWS_SECRET_ACCESS_KEY'] or raise
+    end
+
+    def logger
+      @logger ||= Logger.new($stdout).tap do |logger|
+        logger.level = verbose? ? Logger::DEBUG : Logger::IfNode
+      end
     end
 
     def encoding_for(path)
