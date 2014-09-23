@@ -70,7 +70,7 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
   end
 
   def create_zip
-    sh("git ls-files | zip -q -@ #{archive_name}", :verbose => false)
+    sh("git ls-files | zip -q -@ #{archive_name}", :verbose => !!verbose?)
     archive_name
   end
 
