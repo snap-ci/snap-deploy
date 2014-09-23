@@ -10,7 +10,7 @@ cd $SCRIPT_DIR
 chown nobody.nobody -R $SCRIPT_DIR
 
 # perform the bundle install
-sudo -u nobody NOKOGIRI_USE_SYSTEM_LIBRARIES=1 PATH="/opt/local/ruby/2.0.0-p353/bin:$PATH" "$(which bundle) install --local --standalone --clean"
+sudo -E -u nobody NOKOGIRI_USE_SYSTEM_LIBRARIES=1 PATH="/opt/local/ruby/2.0.0-p353/bin:$PATH" $(which bundle) install --local --standalone --clean
 
 # change ownership back to root
 chown root.root -R $SCRIPT_DIR
