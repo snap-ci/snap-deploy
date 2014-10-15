@@ -104,7 +104,7 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
   end
 
   def setup_aws_auth
-    info "Logging in with Access Key: #{access_key_id[-4..-1].rjust(20, '*')}" unless @aws_configured
+    info "Logging in using Access Key ending with : #{access_key_id[-4..-1]}" unless @aws_configured
     AWS.config(
       access_key_id: access_key_id,
       region: region,
