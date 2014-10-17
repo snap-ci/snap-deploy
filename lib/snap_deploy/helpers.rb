@@ -17,7 +17,7 @@ module SnapDeploy
     end
 
     def access_key_id
-      ENV['AWS_ACCESS_KEY_ID'] or raise
+      ENV['AWS_ACCESS_KEY_ID'] or raise "AWS_ACCESS_KEY_ID is not defined"
     end
 
     def pipeline_counter
@@ -33,7 +33,7 @@ module SnapDeploy
     end
 
     def secret_access_key
-      ENV['AWS_SECRET_ACCESS_KEY'] or raise
+      ENV['AWS_SECRET_ACCESS_KEY'] or raise "AWS_SECRET_ACCESS_KEY is not defined"
     end
 
     def logger
