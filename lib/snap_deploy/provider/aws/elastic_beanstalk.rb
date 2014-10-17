@@ -33,12 +33,11 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     require 'aws-sdk'
     setup_aws_auth
     create_bucket unless bucket_exists?
-    zip_file = create_zip
-    s3_object = upload(archive_name, zip_file)
-    info "Deploying App Version: #{version_label} to App: #{app_name} on Environment: #{env_name}"
+
+    info "Deploying application version `#{version_label}' to application `#{app_name}' on environment `#{env_name}'"
     sleep 5 #s3 eventual consistency
-    version = create_app_version(s3_object)
-    update_app(version)
+    create_app_version unless application_exists?
+    update_environment
   end
 
   private
@@ -48,7 +47,21 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     obj
   end
 
-  def create_app_version(s3_object)
+  def application_exists?
+    application_versions = eb.describe_application_versions({
+      :application_name  => app_name,
+      :version_labels    => [version_label]
+    })[:application_versions]
+
+    if application_versions.any?
+      info "Application version already exists, will not create an application version or upload it to S3"
+      true
+    end
+  end
+
+  def create_app_version
+    zip_file = create_zip
+    s3_object = upload(archive_name, zip_file)
     options = {
       :application_name  => app_name,
       :version_label     => version_label,
@@ -62,11 +75,12 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     eb.create_application_version(options)
   end
 
-  def update_app(version)
+  def update_environment
     options = {
       :environment_name  => env_name,
-      :version_label     => version[:application_version][:version_label]
+      :version_label     => version_label
     }
+    info "Updating environment `#{env_name}' with application version `#{version_label}'"
     eb.update_environment(options)
   end
 
