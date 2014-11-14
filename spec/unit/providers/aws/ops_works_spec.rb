@@ -17,7 +17,6 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
 
   example 'with migrate option not specified' do
     expect(@client).to receive(:describe_apps).with(app_ids: [app_id]).and_return({apps: [ops_works_app]})
-    expect(@client).to receive(:update_app).with(app_id: app_id, app_source: {revision: revision})
     expect(@client).to receive(:create_deployment).with(
       stack_id: stack_id,
       app_id: app_id,
@@ -43,7 +42,6 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
 
   example 'with migrate option specifed' do
     expect(@client).to receive(:describe_apps).with(app_ids: [app_id]).and_return({apps: [ops_works_app]})
-    expect(@client).to receive(:update_app).with(app_id: app_id, app_source: {revision: revision})
     expect(@client).to receive(:create_deployment).with(
       stack_id: stack_id,
       app_id: app_id,
@@ -69,7 +67,6 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
 
   example 'with migrate option forced off' do
     expect(@client).to receive(:describe_apps).with(app_ids: [app_id]).and_return({apps: [ops_works_app]})
-    expect(@client).to receive(:update_app).with(app_id: app_id, app_source: {revision: revision})
     expect(@client).to receive(:create_deployment).with(
       stack_id: stack_id,
       app_id: app_id,
@@ -95,7 +92,6 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
 
   example 'when deployment fails' do
     expect(@client).to receive(:describe_apps).with(app_ids: [app_id]).and_return({apps: [ops_works_app]})
-    expect(@client).to receive(:update_app).with(app_id: app_id, app_source: {revision: revision})
     expect(@client).to receive(:create_deployment).with(
       stack_id: stack_id,
       app_id: app_id,
