@@ -13,7 +13,6 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
   def execute
     require 'aws-sdk'
     Timeout::timeout(600) do
-      update_deployment
       create_deployment
     end
   rescue ::Timeout::Error
@@ -21,12 +20,6 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
   end
 
   private
-  def update_deployment
-    client.update_app(
-      app_id: app_id,
-      app_source: {revision: snap_commit}
-    )
-  end
 
   def create_deployment
     data = client.create_deployment(
