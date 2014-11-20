@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH="/opt/local/ruby/2.0.0-p353/bin:$PATH"
+export PATH="/opt/local/ruby/2.0.0-p598/bin:$PATH"
 
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 

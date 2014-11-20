@@ -50,7 +50,7 @@ namespace :dist do
             f.puts('unset GEM_PATH')
             f.puts('unset RUBYLIB')
             f.puts('unset RUBYOPT')
-            f.puts('export PATH=/opt/local/ruby/2.0.0-p353/bin:$PATH')
+            f.puts('export PATH=/opt/local/ruby/2.0.0-p598/bin:$PATH')
             f.puts('/opt/local/snap-deploy/bin/snap-deploy')
           end
           File.chmod 0755, 'usr/local/bin/snap-deploy'
