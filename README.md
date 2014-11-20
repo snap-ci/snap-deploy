@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/snap-ci/snap-deploy/branch/master/build_image)](https://snap-ci.com/snap-ci/snap-deploy/branch/master)
+
 # SnapDeploy
 
 TODO: Write a gem description
