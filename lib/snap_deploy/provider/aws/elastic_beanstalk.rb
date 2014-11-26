@@ -20,6 +20,10 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     'S3 Bucket.',
     :required => true
 
+  option '--bucket-base-dir',
+    'BUCKET_BASE_DIR',
+    'S3 Bucket base directory'
+
   option '--region',
     "REGION",
     'EC2 Region.',
@@ -61,7 +65,8 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
 
   def create_app_version
     zip_file = create_zip
-    s3_object = upload(archive_name, zip_file)
+    file_path = bucket_base_dir ? File.join(bucket_base_dir, archive_name) : archive_name
+    s3_object = upload(file_path, zip_file)
     options = {
       :application_name  => app_name,
       :version_label     => version_label,
