@@ -24,9 +24,9 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     'BUCKET_BASE_DIR',
     'S3 Bucket base directory'
 
-  option '--version',
+  option '--application-version',
     'VERSION',
-    'Application Version'
+    'Specify an Application Version'
 
   option '--region',
     "REGION",
@@ -107,7 +107,7 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
   end
 
   def version_label
-    version ? version : "snap-ci-#{pipeline_counter}-#{short_commit}"
+    application_version ? application_version : "snap-ci-#{pipeline_counter}-#{short_commit}"
   end
 
   def create_bucket
