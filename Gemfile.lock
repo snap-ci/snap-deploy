@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    snap_deploy (0.0.1)
+    snap_deploy (0.1.0)
       ansi
       aws-sdk
       clamp
