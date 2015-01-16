@@ -45,7 +45,7 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   def deploy_target
     target = {app_id: app_id}
-    target[:instance_ids] = instance-id_list if instance-id_list && !instance-id_list.empty?
+    target[:instance_ids] = instance_id_list if instance_id_list && !instance_id_list.empty?
     return target
   end
 
