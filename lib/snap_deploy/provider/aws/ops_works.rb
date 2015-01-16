@@ -4,7 +4,7 @@ require 'json'
 class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   option '--app-id', "APP_ID", "The application ID", :required => true
-  option '--instance-id', "INSTANCE_ID", "An instance ID to deploy to", :multivalued => true
+  option '--instance-ids', "INSTANCE_IDS", "The instance IDs to deploy to", :multivalued => true
   option '--[no-]wait',    :flag, 'Wait until (or not) deployed and return the deployment status.', :default => true
   option '--[no-]migrate', :flag, 'If the db should be automatically migrated.', :default => true
 
@@ -45,7 +45,7 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   def deploy_target
     target = {app_id: app_id}
-    target[:instance_ids] = instance_id_list if instance_id_list && !instance_id_list.empty?
+    target[:instance_ids] = instance_ids_list if instance_ids_list && !instance_ids_list.empty?
     return target
   end
 
