@@ -29,7 +29,6 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
          'The url of the heroku buildpack' do |url|
     require 'uri'
     if url =~ URI::regexp(%w(http https git))
-      config_var_list << "BUILDPACK_URL=#{url}"
       url
     else
       raise 'The buildpack url does not appear to be a url.'
@@ -159,14 +158,19 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
   def setup_configuration
     print ANSI::Code.ansi('Setting up config vars... ', :cyan)
 
-    if config_var_list.empty?
+    # config_var_list returns a dup
+    configs = config_var_list
+
+    configs << "BUILDPACK_URL=#{buildpack_url}" if buildpack_url
+
+    if configs.empty?
       print ANSI::Code.ansi("No config vars specified\n", :green)
       return
     end
 
     existing_vars = client.config_var.info(app_name)
 
-    vars = config_var_list.inject({}) do |memo, var|
+    vars = configs.inject({}) do |memo, var|
       key, value = var.split('=')
       if existing_vars[key] != value
         memo[key] = value
