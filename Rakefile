@@ -6,7 +6,7 @@ require 'tmpdir'
 desc 'build heroku api'
 task "build-heroku-api" do
   sh('curl --silent --fail https://api.heroku.com/schema -H "Accept: application/vnd.heroku+json; version=3" > /tmp/heroku-schema.json')
-  sh('bundle exec heroics-generate SnapDeploy::Provider::Heroku::API /tmp/heroku-schema.json https://api.heroku.com > lib/snap_deploy/provider/heroku/api.rb')
+  sh('bundle exec heroics-generate -H "Accept: application/vnd.heroku+json; version=3" SnapDeploy::Provider::Heroku::API /tmp/heroku-schema.json https://api.heroku.com > lib/snap_deploy/provider/heroku/api.rb')
 end
 
 desc "Run units"

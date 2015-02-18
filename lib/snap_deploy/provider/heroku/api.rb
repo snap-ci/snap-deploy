@@ -73,7 +73,7 @@ module SnapDeploy::Provider::Heroku::API
 
   # Get the default options.
   def self.default_options
-    default_headers = {}
+    default_headers = {"Accept"=>"application/vnd.heroku+json; version=3"}
     cache = Moneta.new(:Memory)
     {
       default_headers: default_headers,
