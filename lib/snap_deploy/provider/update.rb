@@ -17,7 +17,7 @@ class SnapDeploy::Provider::Update < Clamp::Command
   def execute
     cd(File.dirname(__FILE__), :verbose => !!verbose?) do
       sh("sudo $(which git) fetch --all",  :verbose => !!verbose?)
-      sh("sudo $(which git) merge --ff-only #{revision}", :verbose => !!verbose?)
+      sh("sudo $(which git) merge --ff-only origin/#{revision}", :verbose => !!verbose?)
       sh("cd \"$(git rev-parse --show-toplevel)\" && sudo ./install.sh")
     end
   end
