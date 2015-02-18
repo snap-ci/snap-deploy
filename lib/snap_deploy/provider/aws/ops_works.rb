@@ -4,6 +4,7 @@ require 'json'
 class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   option '--app-id', "APP_ID", "The application ID", :required => true
+  option '--instance-ids', "INSTANCE_IDS", "The instance IDs to deploy to", :multivalued => true
   option '--[no-]wait',    :flag, 'Wait until (or not) deployed and return the deployment status.', :default => true
   option '--[no-]migrate', :flag, 'If the db should be automatically migrated.', :default => true
 
@@ -24,7 +25,7 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
   def create_deployment
     data = client.create_deployment(
       stack_id: ops_works_app[:stack_id],
-      app_id:   app_id,
+      **deploy_target,
       command:  {name: 'deploy'},
       comment:  deploy_comment,
       custom_json: custom_json.to_json
@@ -40,6 +41,12 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
       error "Deployment failed."
       raise "Deployment failed."
     end
+  end
+
+  def deploy_target
+    target = {app_id: app_id}
+    target[:instance_ids] = instance_ids_list if instance_ids_list && !instance_ids_list.empty?
+    return target
   end
 
   def custom_json
