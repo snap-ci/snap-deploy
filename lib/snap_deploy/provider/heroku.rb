@@ -187,8 +187,8 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
     print ANSI::Code.ansi("Pushing branch #{snap_branch} to heroku.\n", :cyan)
     cmd = "git push https://git.heroku.com/#{app_name}.git HEAD:refs/heads/master -f"
     puts "$ #{ANSI::Code.ansi(cmd, :green)}"
-    unless system(cmd)
-      raise "Could not push to heroku remote. The exit code was #{$?.exitstatus}."
+    sh(cmd) do |ok, res|
+      raise "Could not push to heroku remote. The exit code was #{res.exitstatus}." unless ok
     end
   end
 

@@ -140,13 +140,15 @@ RSpec.describe SnapDeploy::Provider::Heroku do
   describe 'git push' do
     it 'should push to heroku via https' do
       @cmd.parse(['--app-name', 'foo'])
-      expect(@cmd).to receive(:system).with('git push https://git.heroku.com/foo.git HEAD:refs/heads/master -f').and_return(true)
+      system('true')
+      expect(@cmd).to receive(:sh).with('git push https://git.heroku.com/foo.git HEAD:refs/heads/master -f').and_yield(true, $?)
       @cmd.send(:git_push)
     end
 
     it 'should raise error when push fails' do
       @cmd.parse(['--app-name', 'foo'])
-      expect(@cmd).to receive(:system).with('git push https://git.heroku.com/foo.git HEAD:refs/heads/master -f').and_return(system('exit -1'))
+      system('exit -1')
+      expect(@cmd).to receive(:sh).with('git push https://git.heroku.com/foo.git HEAD:refs/heads/master -f').and_yield(false, $?)
       expect do
         @cmd.send(:git_push)
       end.to raise_error(RuntimeError, 'Could not push to heroku remote. The exit code was 255.')
