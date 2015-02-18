@@ -128,6 +128,20 @@ RSpec.describe SnapDeploy::Provider::Heroku do
 
       stub_request(:patch, 'https://api.heroku.com/apps/foo/config-vars')
 
+      @cmd.parse(['--app-name', 'foo', '--buildpack-url', 'https://github.com/heroku/heroku-buildpack-ruby'])
+      @cmd.send(:setup_configuration)
+
+      expect(a_request(:patch, "https://api.heroku.com/apps/foo/config-vars").
+               with(:body => {'BUILDPACK_URL' => 'https://github.com/heroku/heroku-buildpack-ruby'}, :headers => { 'Authorization' => "Bearer #{token}"})).to have_been_made
+    end
+
+    it 'should set buildpack url if one is specified along with any configs' do
+      stub_request(:get, 'https://api.heroku.com/apps/foo/config-vars').
+        with(:headers => { 'Authorization' => "Bearer #{token}" }).
+        to_return(:body => { 'FOO' => 'oldfoo', 'BOO' => 'oldboo' }.to_json, :headers => { 'Content-Type' => 'application/json' })
+
+      stub_request(:patch, 'https://api.heroku.com/apps/foo/config-vars')
+
       @cmd.parse(['--app-name', 'foo', '--config-var', 'FOO=newfoo', '--config-var', 'BOO=oldboo', '--config-var', 'NEW_VAR=new_value', '--buildpack-url', 'https://github.com/heroku/heroku-buildpack-ruby'])
       @cmd.send(:setup_configuration)
 
