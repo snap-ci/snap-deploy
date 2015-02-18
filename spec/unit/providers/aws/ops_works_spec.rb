@@ -40,7 +40,7 @@ RSpec.describe SnapDeploy::Provider::AWS::OpsWorks do
                                 )).to_stdout
   end
 
-  example 'with migrate option specifed' do
+  example 'with migrate option specified' do
     expect(@client).to receive(:describe_apps).with(app_ids: [app_id]).and_return({apps: [ops_works_app]})
     expect(@client).to receive(:create_deployment).with(
       stack_id: stack_id,

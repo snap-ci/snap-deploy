@@ -24,11 +24,12 @@ class SnapDeploy::Provider::AWS::OpsWorks < Clamp::Command
 
   def create_deployment
     data = client.create_deployment(
-      stack_id: ops_works_app[:stack_id],
-      **deploy_target,
-      command:  {name: 'deploy'},
-      comment:  deploy_comment,
-      custom_json: custom_json.to_json
+      {
+        stack_id: ops_works_app[:stack_id],
+        command:  {name: 'deploy'},
+        comment:  deploy_comment,
+        custom_json: custom_json.to_json
+      }.merge(deploy_target)
     )
     info "Deployment created: #{data[:deployment_id]}"
     return unless wait?
