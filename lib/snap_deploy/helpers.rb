@@ -16,6 +16,10 @@ module SnapDeploy
       ENV['SNAP_COMMIT'] or raise
     end
 
+    def snap_branch
+      ENV['SNAP_BRANCH'] or raise
+    end
+
     def access_key_id
       ENV['AWS_ACCESS_KEY_ID'] or raise "AWS_ACCESS_KEY_ID is not defined"
     end
@@ -52,10 +56,10 @@ module SnapDeploy
     def encoding_for(path)
       file_cmd_output = `file #{path}`
       case file_cmd_output
-      when /gzip compressed/
-        'gzip'
-      when /compress'd/
-        'compress'
+        when /gzip compressed/
+          'gzip'
+        when /compress'd/
+          'compress'
       end
     end
   end

@@ -8,4 +8,6 @@ group :development, :test do
   gem 'rspec'
   gem 'fpm'
   gem 'rake'
+  gem 'byebug'
+  gem 'webmock'
 end

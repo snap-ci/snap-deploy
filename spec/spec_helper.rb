@@ -6,6 +6,7 @@ SimpleCov.start do
 end
 
 require 'snap_deploy'
+require 'webmock/rspec'
 
 module SpecHelper
   def revision
@@ -27,4 +28,14 @@ RSpec.configure do |config|
   config.tty                 = true
   config.expose_dsl_globally = false
   config.disable_monkey_patching!
+
+  config.before(:each) do
+    @original_env = ENV.to_h.dup
+    ENV.clear
+  end
+
+  config.after(:each) do
+    ENV.replace(@original_env)
+  end
+
 end

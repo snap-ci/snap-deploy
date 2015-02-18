@@ -3,14 +3,17 @@ PATH
   specs:
     snap_deploy (0.1.1)
       ansi
-      aws-sdk
+      aws-sdk (= 1.53.0)
       clamp
+      heroics
       mime-types
+      rendezvous
 
 GEM
   remote: https://rubygems.org/
   specs:
-    ansi (1.4.3)
+    addressable (2.3.7)
+    ansi (1.5.0)
     arr-pm (0.0.9)
       cabin (> 0)
     aws-sdk (1.53.0)
@@ -19,12 +22,22 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     backports (3.6.0)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cabin (0.6.1)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     clamp (0.6.3)
+    columnize (0.9.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
+    debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    erubis (2.7.0)
+    excon (0.44.2)
     ffi (1.9.3)
     fpm (1.2.0)
       arr-pm (~> 0.0.9)
@@ -34,13 +47,22 @@ GEM
       clamp (~> 0.6)
       ffi
       json (>= 1.7.7)
+    heroics (0.0.12)
+      erubis (~> 2.7.0)
+      excon
+      moneta
+      multi_json (>= 1.9.2)
+      netrc
     json (1.8.1)
     mime-types (2.3)
     mini_portile (0.6.0)
+    moneta (0.8.0)
     multi_json (1.10.1)
+    netrc (0.10.2)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     rake (10.3.2)
+    rendezvous (0.1.2)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -53,19 +75,26 @@ GEM
     rspec-mocks (3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.0)
+    safe_yaml (1.0.4)
     simplecov (0.9.0)
       docile (~> 1.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    slop (3.6.0)
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bundler (~> 1.6)
+  byebug
   fpm
   rake
   rspec
   simplecov
   snap_deploy!
+  webmock
