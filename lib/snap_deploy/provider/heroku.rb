@@ -24,6 +24,18 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
          'The name of the config variables',
          :multivalued => true
 
+  option '--buildpack-url',
+         'BUILDPACK_URL',
+         'The url of the heroku buildpack' do |url|
+    require 'uri'
+    if url =~ URI::regexp(%w(http https git))
+      config_var_list << "BUILDPACK_URL=#{url}"
+      url
+    else
+      raise 'The buildpack url does not appear to be a url.'
+    end
+  end
+
   option '--stack-name',
          'STACK_NAME',
          'The name of the heroku stack',
@@ -31,7 +43,7 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
 
   option '--[no-]db-migrate',
          :flag,
-         'If the db should be automatically migrated.',
+         'If the db should be automatically migrated',
          :default => false
 
   def initialize(*args)
@@ -153,8 +165,6 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
     end
 
     existing_vars = client.config_var.info(app_name)
-
-    p existing_vars
 
     vars = config_var_list.inject({}) do |memo, var|
       key, value = var.split('=')
