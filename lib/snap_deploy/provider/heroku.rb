@@ -171,7 +171,7 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
     existing_vars = client.config_var.info(app_name)
 
     vars = configs.inject({}) do |memo, var|
-      key, value = var.split('=')
+      key, value = var.split('=', 2)
       if existing_vars[key] != value
         memo[key] = value
       end

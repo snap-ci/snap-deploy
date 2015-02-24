@@ -147,7 +147,20 @@ RSpec.describe SnapDeploy::Provider::Heroku do
 
       expect(a_request(:patch, "https://api.heroku.com/apps/foo/config-vars").
                with(:body => {'FOO' => 'newfoo', 'NEW_VAR' => 'new_value', 'BUILDPACK_URL' => 'https://github.com/heroku/heroku-buildpack-ruby'}, :headers => { 'Authorization' => "Bearer #{token}"})).to have_been_made
+    end
 
+    it 'should work with config vars which have a "=" in their values' do
+      stub_request(:get, 'https://api.heroku.com/apps/foo/config-vars').
+        with(:headers => { 'Authorization' => "Bearer #{token}" }).
+        to_return(:body => { 'FOO' => 'oldfoo' }.to_json, :headers => { 'Content-Type' => 'application/json' })
+
+      stub_request(:patch, 'https://api.heroku.com/apps/foo/config-vars')
+
+      @cmd.parse(['--app-name', 'foo', '--config-var', 'FOO=new=foo==bar'])
+      @cmd.send(:setup_configuration)
+
+      expect(a_request(:patch, "https://api.heroku.com/apps/foo/config-vars").
+               with(:body => {'FOO' => 'new=foo==bar'}, :headers => { 'Authorization' => "Bearer #{token}"})).to have_been_made
     end
   end
 
