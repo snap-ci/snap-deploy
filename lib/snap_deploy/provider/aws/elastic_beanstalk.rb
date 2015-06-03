@@ -29,9 +29,13 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     'Specify an Application Version'
 
   option '--region',
-    "REGION",
+    'REGION',
     'EC2 Region.',
     :default => 'us-east-1'
+
+  option '--archive',
+    'ARCHIVE',
+    'Specify application archive file'
 
   include SnapDeploy::CLI::DefaultOptions
   include SnapDeploy::Helpers
@@ -68,9 +72,8 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
   end
 
   def create_app_version
-    zip_file = create_zip
     file_path = bucket_base_dir ? File.join(bucket_base_dir, archive_name) : archive_name
-    s3_object = upload(file_path, zip_file)
+    s3_object = upload(file_path, archive_file)
     options = {
       :application_name  => app_name,
       :version_label     => version_label,
@@ -93,6 +96,10 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
     eb.update_environment(options)
   end
 
+  def archive_file
+    archive ? archive : create_zip
+  end
+
   def create_zip
     sh("git ls-files | zip -q -@ #{archive_name}", :verbose => !!verbose?)
     archive_name
@@ -103,7 +110,15 @@ class SnapDeploy::Provider::AWS::ElasticBeanstalk < Clamp::Command
   end
 
   def archive_name
-    "#{version_label}.zip"
+    archive ? "#{archive_base_name}-#{version_label}#{archive_ext_name}" : "#{version_label}.zip"
+  end
+
+  def archive_base_name
+    File.basename(archive, archive_ext_name)
+  end
+
+  def archive_ext_name
+    File.extname(archive)
   end
 
   def version_label
