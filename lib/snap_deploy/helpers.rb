@@ -20,6 +20,14 @@ module SnapDeploy
       ENV['SNAP_BRANCH'] or raise
     end
 
+    def upstream_snap_branch
+      ENV['SNAP_BRANCH']
+    end
+
+    def pull_request_number
+      ENV['SNAP_PULL_REQUEST_NUMBER']
+    end
+
     def access_key_id
       ENV['AWS_ACCESS_KEY_ID'] or raise "AWS_ACCESS_KEY_ID is not defined"
     end

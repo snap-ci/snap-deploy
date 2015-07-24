@@ -188,7 +188,11 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
   end
 
   def git_push
-    print ANSI::Code.ansi("Pushing branch #{snap_branch} to heroku.\n", :cyan)
+    if pull_request_number
+      print ANSI::Code.ansi("Pushing upstream branch #{upstream_snap_branch} from pull request #{pull_request_number} to heroku.\n", :cyan)
+    else
+      print ANSI::Code.ansi("Pushing branch #{snap_branch} to heroku.\n", :cyan)
+    end
     cmd = "git push https://git.heroku.com/#{app_name}.git HEAD:refs/heads/master -f"
     puts "$ #{ANSI::Code.ansi(cmd, :green)}"
     sh(cmd) do |ok, res|
