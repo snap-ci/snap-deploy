@@ -20,8 +20,8 @@ module SnapDeploy
       ENV['SNAP_BRANCH'] or raise
     end
 
-    def upstream_snap_branch
-      ENV['SNAP_BRANCH']
+    def snap_upstream_branch
+      ENV['SNAP_UPSTREAM_BRANCH']
     end
 
     def pull_request_number

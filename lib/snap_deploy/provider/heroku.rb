@@ -189,7 +189,7 @@ class SnapDeploy::Provider::Heroku < Clamp::Command
 
   def git_push
     if pull_request_number
-      print ANSI::Code.ansi("Pushing upstream branch #{upstream_snap_branch} from pull request #{pull_request_number} to heroku.\n", :cyan)
+      print ANSI::Code.ansi("Pushing upstream branch #{snap_upstream_branch} from pull request #{pull_request_number} to heroku.\n", :cyan)
     else
       print ANSI::Code.ansi("Pushing branch #{snap_branch} to heroku.\n", :cyan)
     end
