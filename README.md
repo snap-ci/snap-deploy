@@ -2,7 +2,7 @@
 
 # SnapDeploy
 
-TODO: Write a gem description
+A deploy tool for continuous deployment. Used by [Snap CI](https://snap-ci.com)
 
 ## Installation
 
