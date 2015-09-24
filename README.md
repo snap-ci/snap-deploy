@@ -20,7 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Currently, it supports aws and heroku deploy. You can use the commands below for more informations:
+
+    $ snap-deploy heroku --help
+    $ snap-deploy aws --help
 
 ## Contributing
 
