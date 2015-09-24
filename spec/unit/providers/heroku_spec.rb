@@ -9,11 +9,11 @@ RSpec.describe SnapDeploy::Provider::Heroku do
 
   describe 'execution behavior' do
     it 'should invoke methods in order' do
-      expect(@cmd).to receive(:check_auth)
-      expect(@cmd).to receive(:maybe_create_app)
-      expect(@cmd).to receive(:setup_configuration)
-      expect(@cmd).to receive(:git_push)
-      expect(@cmd).to receive(:maybe_db_migrate)
+      expect(@cmd).to receive(:check_auth).ordered
+      expect(@cmd).to receive(:maybe_create_app).ordered
+      expect(@cmd).to receive(:setup_configuration).ordered
+      expect(@cmd).to receive(:git_push).ordered
+      expect(@cmd).to receive(:maybe_db_migrate).ordered
 
       @cmd.run(['--app-name', 'foo'])
     end
