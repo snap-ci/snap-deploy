@@ -2,7 +2,7 @@
 
 # SnapDeploy
 
-A deploy tool for continuous deployment. Used by [Snap CI](https://snap-ci.com)
+A deploy tool for continuous deployment. Used by [Snap CI](https://snap-ci.com). To report any issues, [please contact the Snap.ci support team.](https://snap-ci.com/contact-us)
 
 ## Installation
 
