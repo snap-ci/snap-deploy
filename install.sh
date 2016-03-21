@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd)"
 cd $SCRIPT_DIR
 
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
-export PATH="/opt/local/ruby/2.0.0-p598/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/opt/local/ruby/2.2.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # change ownership to nobody to not screw up things (even accidentally)
 chown nobody -R $SCRIPT_DIR
