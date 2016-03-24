@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+ENV.delete('BUNDLE_BIN_PATH')
+ENV.delete('BUNDLE_GEMFILE')
+ENV.delete('GEM_HOME')
+ENV.delete('GEM_PATH')
+ENV.delete('RUBYLIB')
+ENV.delete('RUBYOPT')
+
 $:.unshift(File.join(File.expand_path('../../', __FILE__), 'bundle'))
 require 'bundler/setup'
 
