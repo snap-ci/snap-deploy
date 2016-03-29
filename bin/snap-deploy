@@ -1,17 +1,11 @@
-#!/usr/bin/env ruby
+#!/bin/bash
+set -e
 
-ENV.delete('BUNDLE_BIN_PATH')
-ENV.delete('BUNDLE_GEMFILE')
-ENV.delete('GEM_HOME')
-ENV.delete('GEM_PATH')
-ENV.delete('RUBYLIB')
-ENV.delete('RUBYOPT')
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# More info about this: https://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 
-$:.unshift(File.join(File.expand_path('../../', __FILE__), 'bundle'))
-require 'bundler/setup'
-
-Process.respond_to?(:setproctitle) ? Process.setproctitle('snap-deploy') : $0 = 'snap-deploy'
-
-require 'snap_deploy'
-
-SnapDeploy::CLI.run
+if [ "$( ruby --version )" != "$( cat $CURRENT_DIR/../.ruby-version )" ]; then
+  exec env RBENV_VERSION="$( cat $CURRENT_DIR/../.ruby-version )" $CURRENT_DIR/snap-deploy-assuming-ruby-version-set "$@"
+else
+  exec $CURRENT_DIR/snap-deploy-assuming-ruby-version-set "$@"
+fi
