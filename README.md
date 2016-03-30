@@ -2,11 +2,13 @@
 
 # SnapDeploy
 
-A deploy tool for continuous deployment. Used by [Snap CI](https://snap-ci.com)
+A simple cli tool to help with Heroku and AWS deployments. Used by [Snap CI](https://snap-ci.com)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+SnapDeploy is already available in the Snap CI build environment. You can simply start using it in your builds by invoking the `snap-deploy` command.
+
+If you want to use `snap-deploy` outside the Snap CI environment, you can add this line to your application's Gemfile:
 
     gem 'snap_deploy'
 
@@ -17,6 +19,8 @@ And then execute:
 Or install it yourself as:
 
     $ gem install snap_deploy
+
+> Ruby version support: We will supporting this gem only with ruby 2.2.4. If there is reason you would like to use this gem with some other version of ruby, please get in touch with us by writing to support@snap-ci.com
 
 ## Usage
 
