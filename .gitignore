@@ -15,7 +15,7 @@ test/version_tmp
 tmp
 vendor/bundle
 bundle
-.tags
+.tags*
 .tags_sorted_by_file
 .idea/
 *.swp
