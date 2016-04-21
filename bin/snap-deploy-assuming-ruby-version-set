@@ -1,12 +1,5 @@
 #!/usr/bin/env ruby
 
-ENV.delete('BUNDLE_BIN_PATH')
-ENV.delete('BUNDLE_GEMFILE')
-ENV.delete('GEM_HOME')
-ENV.delete('GEM_PATH')
-ENV.delete('RUBYLIB')
-ENV.delete('RUBYOPT')
-
 Process.respond_to?(:setproctitle) ? Process.setproctitle('snap-deploy') : $0 = 'snap-deploy'
 
 $:.unshift(File.join(File.expand_path('../../', __FILE__), 'bundle'))

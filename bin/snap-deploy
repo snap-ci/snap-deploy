@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+unset BUNDLE_BIN_PATH
+unset BUNDLE_GEMFILE
+unset GEM_HOME
+unset GEM_PATH
+unset RUBYLIB
+unset RUBYOPT
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # More info about this: https://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 
