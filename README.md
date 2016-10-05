@@ -2,7 +2,7 @@
 
 # SnapDeploy
 
-A simple cli tool to help with Heroku and AWS deployments. Used by [Snap CI](https://snap-ci.com)
+A simple cli tool to help with Heroku and AWS deployments. Used by [Snap CI](https://snap-ci.com). To report any issues, [please contact the Snap.ci support team.](https://snap-ci.com/contact-us)
 
 ## Installation
 
