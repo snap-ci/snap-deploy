@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
+  gem 'bundler-audit'
   gem 'simplecov'
   gem 'rspec'
   gem 'fpm'
